@@ -1,0 +1,6 @@
+/backend/node_modules/
+/images
+/examples
+archive.zip
+/ML_testing
+/ML_backend/bestmodel_20class.hdf5
