@@ -67,7 +67,9 @@ def predict():
                         nutrition = row
                         break
             print(pred, nutrition)
-            return render_template('predict.html', pred = pred, user_image = file_path, nutrition=nutrition)
+            # return in json format
+            return {"Food": pred, "Nutrition": nutrition}
+            # return render_template('predict.html', pred = pred, user_image = file_path, nutrition=nutrition)
             #print(pred)
         # if file and allowed_file(file.filename): #Checking file format
         #     filename = file.filename
@@ -92,13 +94,23 @@ def predict():
 @app.route('/predict_api',methods=['POST'])
 def predict_api():
     if request.method == 'POST':
+        print(request)
         file = request.files['file']
         if file and allowed_file(file.filename):
             filename = file.filename
             file_path = os.path.join('static/images', filename)
             file.save(file_path)
             pred = predict_class(model, file_path)
-            return pred
+            nutrition = ""
+            # get the values from the food.csv file by reading the file and search for the predicted Food_item in it
+            with open("./food.csv", 'r', newline='', encoding='utf-8') as file:
+                reader = csv.DictReader(file)
+                for row in reader:
+                    if row['Food_Item'] == pred:
+                        nutrition = row
+                        break
+            print(pred, nutrition)
+            return {"Food": pred, "Nutrition": nutrition}
         
 if __name__ == '__main__':
     app.run(debug=True,use_reloader=True, port=8000)
