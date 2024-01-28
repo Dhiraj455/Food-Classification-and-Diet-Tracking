@@ -68,8 +68,8 @@ def predict():
                         break
             print(pred, nutrition)
             # return in json format
-            return {"Food": pred, "Nutrition": nutrition}
-            # return render_template('predict.html', pred = pred, user_image = file_path, nutrition=nutrition)
+            # return {"Food": pred, "Nutrition": nutrition}
+            return render_template('predict.html', pred = pred, user_image = file_path, nutrition=nutrition)
             #print(pred)
         # if file and allowed_file(file.filename): #Checking file format
         #     filename = file.filename
