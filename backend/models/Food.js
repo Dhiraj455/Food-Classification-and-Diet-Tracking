@@ -13,6 +13,9 @@ const FoodSessionSchema = new mongoose.Schema({
     sessionDay :{
         type: String,
     },
+    totalCalories: {
+      type: Number,
+    }
 });
 
 const FoodSchema = new mongoose.Schema({

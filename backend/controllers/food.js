@@ -25,6 +25,7 @@ module.exports.addFood = async (req, res) => {
         sessionDate: todayDate,
         sessionDay: sessionDay,
         createdBy: req.user._id,
+        totalCalories: calories,
       });
       await newSession.save();
       const newFood = new Food.Food({

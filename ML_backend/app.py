@@ -1,4 +1,3 @@
-# from flask import Flask, render_template, request
 from flask import Flask, render_template, request
 from tensorflow.keras.models import load_model
 import numpy as np
@@ -11,9 +10,9 @@ import matplotlib.pyplot as plt
 import csv
 app = Flask(__name__)
 
-model = load_model('../ML_testing/bestmodel_20class.hdf5',compile = False)
+model = load_model('./bestmodel_20class.hdf5', compile=False)
 target_img = os.path.join(os.getcwd() , 'static/images')
-food_list =  ['beef_tartare', 'bread_pudding', 'breakfast_burrito', 'chicken_curry', 'chocolate_mousse', 'churros', 'club_sandwich', 'crab_cakes', 'french_fries', 'french_toast', 'fried_rice', 'garlic_bread', 'hot_and_sour_soup', 'hot_dog', 'ice_cream', 'lasagna', 'macarons', 'oysters', 'pizza', 'takoyaki']
+food_list =  ['beef_tartare','beet_salad','bread_pudding', 'breakfast_burrito', 'chicken_curry', 'chocolate_cake', 'club_sandwich', 'dumplings', 'french_toast', 'fried_rice','frozen_yogurt','garlic_bread', 'hot_and_sour_soup','ice_cream', 'macarons', 'omelette', 'pizza', 'samosa', 'spring_rolls', 'waffles']
 
 @app.route('/')
 def index_view():
@@ -41,13 +40,14 @@ def predict_class(model, img, show = True):
     img = preprocess_input(img)                                      
     pred = model.predict(img)
     index = np.argmin(pred)
+    print(index)
     food_list.sort()
     pred_value = food_list[index]
-    if show:
-      plt.imshow(img[0])                           
-      plt.axis('off')
-      plt.title(pred_value)
-      plt.show()
+    # if show:
+    #   plt.imshow(img[0])                           
+    #   plt.axis('off')
+    #   plt.title(pred_value)
+    #   plt.show()
     return pred_value
 @app.route('/predict',methods=['GET','POST'])
 def predict():
