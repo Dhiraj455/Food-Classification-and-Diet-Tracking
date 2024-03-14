@@ -9,12 +9,14 @@ module.exports.addFood = async (req, res) => {
     errMessage: "",
   };
   try {
+    console.log(req.body, "Body");
+    console.log(req.file, "Files");
     const {name,calories,protein,carbs,fats,fiber} = req.body;
     const todayDate = new Date();
     const sessionDay = todayDate.toDateString();
     let food;
-    if (req.files) {
-      food = process.env.URL + "/images/Food/" + req.files.filename;
+    if (req.file) {
+      food = process.env.URL + "/images/Food/" + req.file.filename;
     } else {
       response.message = "Set Post Image";
       return res.status(200).json(response);
@@ -24,7 +26,7 @@ module.exports.addFood = async (req, res) => {
       const newSession = new Food.Session({
         sessionDate: todayDate,
         sessionDay: sessionDay,
-        createdBy: req.user._id,
+        createdBy: "65f2e685ee2ccd52aea97cd6",
         totalCalories: calories,
       });
       await newSession.save();
@@ -39,7 +41,8 @@ module.exports.addFood = async (req, res) => {
           fats,
           fiber,
         },
-        createdBy: req.user._id,
+        createdBy: "65f2e685ee2ccd52aea97cd6",
+        // createdBy: req.user._id;
       });
       await newFood.save();
     } else {
@@ -54,7 +57,7 @@ module.exports.addFood = async (req, res) => {
           fats,
           fiber,
         },
-        createdBy: req.user._id,
+        createdBy: "65f2e685ee2ccd52aea97cd6",
       });
       await newFood.save();
     }

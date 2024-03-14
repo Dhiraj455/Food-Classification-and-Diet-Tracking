@@ -3,9 +3,8 @@ const User = require("../models/User");
 
 const authentication = async (req, res, next) => {
     try{
-        console.log(req.cookies);
-        let token = ""; 
-        req.header("Authorization") ? token = req.header("Authorization").replace("Bearer ","") : token = req.cookies.jwttoken;
+        console.log(req, "Request");
+        const token = req.cookies.jwttoken;
         if(token == undefined || !token){
             return res.status(401).json({message:"Unauthorized"});
         }

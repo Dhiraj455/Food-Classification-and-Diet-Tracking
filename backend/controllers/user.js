@@ -48,6 +48,8 @@ module.exports.userLogin = async (req, res) => {
   };
   try {
     const { email, password } = req.body;
+    console.log("Login")
+    let token = "";
     const user = await User.findOne({ email });
     if (!user) {
       response.errMessage = "User not found";
@@ -55,18 +57,17 @@ module.exports.userLogin = async (req, res) => {
     }
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      response.errMessage = "Incorrect password";
-      return res.status(400).json(response);
-    }
-    let token = await user.generateAuthToken();
-    console.log(token);
-    const maxAge = 1000 * 60;
-    res.cookie("jwttoken", token, {
-      httpOnly: true,
-      secure: true,
-      expires: maxAge,
-      maxAge: maxAge * 1000,
-    });
+        return res.status(400).json({ message: "Invalid Credentials" });
+      }
+      token = await user.generateAuthToken();
+      const maxAge = 1000 * 60;
+      res.cookie("jwttoken", token, {
+        httpOnly: true,
+        secure: true,
+        expires: maxAge,
+        maxAge: maxAge * 1000,
+      });
+
     await User.findOneAndUpdate(
       { _id: user._id },
       {

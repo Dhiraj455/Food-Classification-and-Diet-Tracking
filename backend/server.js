@@ -1,35 +1,40 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-var multer = require('multer');
+var multer = require("multer");
 require("dotenv").config();
 require("./config/db");
 const path = require("path");
 const initRoutes = require("./routes/index");
-const formData = require('express-form-data');
+const cookieParser = require("cookie-parser");
+// const formData = require('express-form-data');
 const app = express();
 
-app.use(formData.parse());
+// app.use(formData.parse());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 
-app.use(cors());
-app.all('/*', function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Content-Type,accept,access_token,X-Requested-With');
-  next();
-});
+app.use(cors({ credentials: true }));
+// app.use(function (req, res, next) {
+//   res.header("Access-Control-Allow-Origin", req.headers.origin);
+//   res.header(
+//     "Access-Control-Allow-Headers",
+//     "Origin, X-Requested-With, Content-Type, Accept"
+//   );
+//   next();
+// });
 
-app.use(express.static('public'));
+app.use(express.static("public"));
 
 app.get("/", function (req, res) {
   res.send("Hello World");
 });
 
 const upload = multer({
-  destination: 'public/images',
+  destination: "public/images",
 });
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public")));
 
 initRoutes(app);
 const PORT = process.env.PORT || 5000;
