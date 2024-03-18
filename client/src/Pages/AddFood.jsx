@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { addFood } from "../Services/food";
 
 export default function AddFood() {
   const [image, setImage] = useState();
@@ -62,19 +63,21 @@ export default function AddFood() {
       expressFormData.append('fats', predictionData.Nutrition['Fat (g)']);
       expressFormData.append('fiber', predictionData.Nutrition['Fiber (g)']);
       // Add other fields as needed
-  
-      fetch('http://localhost:5000/api/v1/food/add', {
-        method: 'POST',
-        body: expressFormData,
-      })
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
-        // Handle response from Express API
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
+      
+      const data = addFood(expressFormData);
+      console.log(data);
+      // fetch('http://localhost:5000/api/v1/food/add', {
+      //   method: 'POST',
+      //   body: expressFormData,
+      // })
+      // .then(response => response.json())
+      // .then(data => {
+      //   console.log(data);
+      //   // Handle response from Express API
+      // })
+      // .catch(error => {
+      //   console.error('Error:', error);
+      // });
     };
 
   }

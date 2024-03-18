@@ -37,6 +37,14 @@ const UserSchema = new mongoose.Schema({
       type: String,
     },
   },
+  userGoal: {
+    weight: {
+      type: Number,
+    },
+    dailyCarbs: {
+      type: Number,
+    },
+  },
   token: {
     type: String,
   },

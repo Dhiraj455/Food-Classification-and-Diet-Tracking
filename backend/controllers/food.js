@@ -26,7 +26,7 @@ module.exports.addFood = async (req, res) => {
       const newSession = new Food.Session({
         sessionDate: todayDate,
         sessionDay: sessionDay,
-        createdBy: "65f2e685ee2ccd52aea97cd6",
+        createdBy: req.user._id,
         totalCalories: calories,
       });
       await newSession.save();
@@ -41,8 +41,7 @@ module.exports.addFood = async (req, res) => {
           fats,
           fiber,
         },
-        createdBy: "65f2e685ee2ccd52aea97cd6",
-        // createdBy: req.user._id;
+        createdBy: req.user._id,
       });
       await newFood.save();
     } else {
@@ -57,7 +56,7 @@ module.exports.addFood = async (req, res) => {
           fats,
           fiber,
         },
-        createdBy: "65f2e685ee2ccd52aea97cd6",
+        createdBy: req.user._id,
       });
       await newFood.save();
     }

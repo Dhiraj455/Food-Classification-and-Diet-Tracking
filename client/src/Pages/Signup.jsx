@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Signup() {
   const [userData, setUserData] = useState({});
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(userData);
@@ -69,6 +71,7 @@ export default function Signup() {
         />
       </form>
       <button type="submit" onClick={handleSubmit}>Signup</button>
+      <button onClick={() => navigate("/")}>Go to login</button>
     </div>
   );
 }

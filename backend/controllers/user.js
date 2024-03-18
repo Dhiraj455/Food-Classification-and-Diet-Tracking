@@ -48,7 +48,7 @@ module.exports.userLogin = async (req, res) => {
   };
   try {
     const { email, password } = req.body;
-    console.log("Login")
+    console.log("Login");
     let token = "";
     const user = await User.findOne({ email });
     if (!user) {
@@ -57,16 +57,15 @@ module.exports.userLogin = async (req, res) => {
     }
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-        return res.status(400).json({ message: "Invalid Credentials" });
-      }
-      token = await user.generateAuthToken();
-      const maxAge = 1000 * 60;
-      res.cookie("jwttoken", token, {
-        httpOnly: true,
-        secure: true,
-        expires: maxAge,
-        maxAge: maxAge * 1000,
-      });
+      return res.status(400).json({ message: "Invalid Credentials" });
+    }
+    token = await user.generateAuthToken();
+    const maxAge = 1000 * 60;
+    res.cookie("jwttoken", token, {
+      httpOnly: true,
+      expires: maxAge,
+      maxAge: maxAge * 1000,
+    });
 
     await User.findOneAndUpdate(
       { _id: user._id },
@@ -96,9 +95,10 @@ module.exports.userUpdate = async (req, res) => {
     data: "",
   };
   try {
-    const { username, age, height, weight, gender } = req.body;
+    const { username, age, height, weight, gender, goal } = req.body;
     console.log(req.body);
     let BMI = (weight / (height * height)) * 10000;
+    let BMR;
     console.log(BMI);
     let category = "";
     if (BMI < 18.5) {
@@ -109,6 +109,11 @@ module.exports.userUpdate = async (req, res) => {
       category = "Overweight";
     } else {
       category = "Obese";
+    }
+    if (gender === "Female") {
+      BMR = 10 * weight + 6.25 * height - 5 * age + 5;
+    } else {
+      BMR = 10 * weight + 6.25 * height - 5 * age - 161;
     }
     User.findOneAndUpdate(
       { _id: req.userid },
@@ -122,6 +127,10 @@ module.exports.userUpdate = async (req, res) => {
             weight: weight,
             BMI: BMI,
             category: category,
+          },
+          userGoal: {
+            weight: goal,
+            dailyCarbs: BMR,
           },
         },
       },
