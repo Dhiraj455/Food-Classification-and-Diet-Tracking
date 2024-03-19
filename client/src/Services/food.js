@@ -8,3 +8,12 @@ export const addFood = async (foodData) => {
         return error;
     }
 }
+
+export const getAllSession = async () => {
+    try {
+        const response = await axios.get('/api/v1/food/getSession');
+        return response.data;
+    } catch (error) {
+        return error;
+    }
+}

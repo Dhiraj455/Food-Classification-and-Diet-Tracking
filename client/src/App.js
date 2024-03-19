@@ -7,6 +7,7 @@ import Signup from "./Pages/Signup";
 import { Dashboard } from "./Pages/Dashboard";
 import { Profile } from "./Pages/Profile";
 import { UpdateUser } from "./Pages/UpdateUser";
+import { Session } from "./Pages/Session";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
               <Route path="/addfood" element={<AddFood />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/update" element={<UpdateUser />} />
+              <Route path="/sessions" element={<Session />} />
             </Routes>
           </BrowserRouter>
         </header>

@@ -72,8 +72,10 @@ module.exports.addFood = async (req, res) => {
 
 module.exports.getAllSession = async (req, res) => {
   let response = { success: false, message: "", data: [], errMessage: "" };
-  try{
-    const session = await Food.Session.find({ createdBy: "65f2e685ee2ccd52aea97cd6" });
+  try {
+    const session = await Food.Session.find({
+      createdBy: req.user._id,
+    });
     if (session.length === 0) {
       response.message = "No session found";
       return res.status(200).json(response);

@@ -12,4 +12,6 @@ router.post(
   foodController.addFood
 );
 
+router.get("/getSession", authentication, foodController.getAllSession);
+
 module.exports = router;
