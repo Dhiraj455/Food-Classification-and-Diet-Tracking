@@ -52,7 +52,8 @@ export const Profile = () => {
           <>User data not added</>
         )}
       </div>
-      <button onClick={() => navigate("/update")}>Update</button>
+      <button onClick={() => navigate("/update")} style={{ padding: "10px" }}>Update</button>
+      <button onClick={() => navigate("/sessions")} style={{ padding: "10px" }}>Sessions</button>
     </div>
   );
 };

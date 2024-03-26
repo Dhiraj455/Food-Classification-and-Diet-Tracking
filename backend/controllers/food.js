@@ -21,7 +21,10 @@ module.exports.addFood = async (req, res) => {
       response.message = "Set Post Image";
       return res.status(200).json(response);
     }
-    const session = await Food.Session.findOne({ sessionDay: sessionDay });
+    const session = await Food.Session.findOne({
+      sessionDay: sessionDay,
+      createdBy: req.user._id,
+    });
     if (!session) {
       const newSession = new Food.Session({
         sessionDate: todayDate,
@@ -45,6 +48,14 @@ module.exports.addFood = async (req, res) => {
       });
       await newFood.save();
     } else {
+      Food.Session.findOneAndUpdate(
+        {
+          sessionDate: todayDate,
+          sessionDay: sessionDay,
+          createdBy: req.user._id,
+        },
+        { $inc: { totalCalories: calories } }
+      );
       const newFood = new Food.Food({
         sessionId: session._id,
         foodDetails: {
@@ -81,8 +92,12 @@ module.exports.getAllSession = async (req, res) => {
       return res.status(200).json(response);
     }
     for (let i = 0; i < session.length; i++) {
+      let totalCalories = 0;
       const food = await Food.Food.find({ sessionId: session[i]._id });
-      response.data.push({ session: session[i], food });
+      for (let j = 0; j < food.length; j++) {
+        totalCalories += food[j].foodDetails.calories;
+      }
+      response.data.push({ session: session[i], food, totalCalories });
     }
     response.success = true;
     response.message = "Session found successfully";

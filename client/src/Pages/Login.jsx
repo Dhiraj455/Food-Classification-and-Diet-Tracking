@@ -18,7 +18,13 @@ export default function Login() {
     e.preventDefault();
     console.log(loginData);
     if (loginData.email && loginData.password) {
-      const response = userLogin(loginData);
+      const response = await userLogin(loginData);
+      if(response.success) {
+        alert("User Login Success")
+        navigate("/dashboard");
+      } else {
+        alert("User Login Failed")
+      }
       // await fetch("http://localhost:5000/api/v1/user/login", {
       //   method: "POST",
       //   credentials: 'include',
