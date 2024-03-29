@@ -13,8 +13,6 @@ function App() {
   return (
     <CookiesProvider>
       <div className="App">
-        <header className="App-header">
-          <h1>Food Recognition</h1>
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Login />} />
@@ -26,7 +24,6 @@ function App() {
               <Route path="/sessions" element={<Session />} />
             </Routes>
           </BrowserRouter>
-        </header>
       </div>
     </CookiesProvider>
   );

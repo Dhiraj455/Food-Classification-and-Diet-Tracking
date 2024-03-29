@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { userRegister } from "../Services/user";
+import "../Assets/CSS/LoginSignup.css";
+import hero from "../Assets/Images/Logo.svg";
 
 export default function Signup() {
   const [userData, setUserData] = useState({});
@@ -28,11 +30,11 @@ export default function Signup() {
         // );
         // const data = await response.json();
         const data = await userRegister(userData);
-        if(data.success) {
-          alert("User Registered Success")
+        if (data.success) {
+          alert("User Registered Success");
           navigate("/");
         } else {
-          alert("User Registration Failed")
+          alert("User Registration Failed");
         }
         console.log(data);
       } else {
@@ -50,36 +52,73 @@ export default function Signup() {
     });
   };
   return (
-    <div>
-      <h1>Signup</h1>
-      <form>
-        <input
-          type="text"
-          placeholder="Username"
-          name="username"
-          onChange={handleChange}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          name="password"
-          onChange={handleChange}
-        />
-        <input
-          type="password"
-          placeholder="Confirm Password"
-          name="cpassword"
-          onChange={handleChange}
-        />
-        <input
-          type="email"
-          placeholder="Email"
-          name="email"
-          onChange={handleChange}
-        />
-      </form>
-      <button type="submit" onClick={handleSubmit}>Signup</button>
-      <button onClick={() => navigate("/")}>Go to login</button>
+    <div className="hero">
+      <div className="branding">
+        <img src={hero} alt="logo" className="logo" />
+        {/* <h2 className="logo">Healthify</h2> */}
+        {/* <p className="slogan">It's gonna be legendary</p> */}
+      </div>
+      <div className="box">
+        <p>Sign Up</p>
+        <form action="/" method="post">
+          <div className="input-group">
+            <div className="input-field">
+              <i className="fa-solid fa-user"></i>
+              <input
+                type="name"
+                placeholder="Username"
+                name="username"
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+          <div className="input-group">
+            <div className="input-field">
+              <i className="fa-solid fa-envelope"></i>
+              <input
+                type="email"
+                placeholder="Email"
+                name="email"
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+          <div className="input-group">
+            <div className="input-field">
+              <i className="fa-solid fa-lock"></i>
+              <input
+                type="password"
+                placeholder="Password"
+                name="password"
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+          <div className="input-group">
+            <div className="input-field">
+              <i className="fa-solid fa-lock"></i>
+              <input
+                type="password"
+                placeholder="Confirm Password"
+                name="cpassword"
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+          <div className="button-field">
+            <input
+              type="submit"
+              id="login"
+              value="Sign Up"
+              className="button"
+              onClick={handleSubmit}
+            />
+          </div>
+        </form>
+        <div className="link">
+          Already have an account? <span onClick={() => navigate("/")} style={{color: "blue", textDecoration: "underline", cursor: "pointer"}}>Login</span>
+        </div>
+      </div>
     </div>
   );
 }
