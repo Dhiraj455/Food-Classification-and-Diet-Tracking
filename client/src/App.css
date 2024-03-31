@@ -7,6 +7,10 @@ body{
   background: linear-gradient(rgba(144, 60, 124, 0.4), rgba(144, 60, 124, 0.4));
 }
 
+.App{
+  text-align: center;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -14,7 +18,7 @@ body{
 }
 
 .App-header {
-  background-color: #282c34;
+  width: 100%;
   min-height: 100vh;
   display: flex;
   flex-direction: column;

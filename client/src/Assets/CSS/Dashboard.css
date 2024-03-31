@@ -1,0 +1,49 @@
+.dashboard-hero {
+    background: linear-gradient(rgba(19, 14, 17, 0.4), rgba(0, 0, 0, 0.4)), url("../Images/bg-coworking.jpeg");
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+}
+
+.hero-info {
+    text-align: start;
+    padding: 40px;
+    margin-top: 10%;
+    color: #fff;
+    width: 50%;
+}
+
+.hero-info h2 {
+    font-size: 40px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.hero-info button {
+    padding: 10px 20px;
+    border: none;
+    font-size: 20px;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 10px;
+}
+
+.hero-info button:hover {
+    background: #000;
+    color: #fff;
+}
+
+.hero-info p {
+    font-size: 20px;
+    padding-top: 20px;
+}
+
+.read{
+    margin-left: 5px;
+    background: transparent;
+    color: #fff;
+}
+
+.hero-btn{
+    margin-top: 20px;
+}
