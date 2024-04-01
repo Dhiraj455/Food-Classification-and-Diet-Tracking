@@ -41,7 +41,7 @@ const UserSchema = new mongoose.Schema({
     weight: {
       type: Number,
     },
-    dailyCarbs: {
+    dailyCals: {
       type: Number,
     },
   },

@@ -130,7 +130,7 @@ module.exports.userUpdate = async (req, res) => {
           },
           userGoal: {
             weight: goal,
-            dailyCarbs: BMR,
+            dailyCals: BMR,
           },
         },
       },
@@ -189,9 +189,21 @@ module.exports.userProfile = async (req, res) => {
       response.errMessage = "User not found";
       return res.status(404).json(response);
     }
+    let userData = {
+      username: user.username,
+      email: user.email,
+      age: user.userData.age,
+      height: user.userData.height,
+      weight: user.userData.weight,
+      gender: user.userData.gender,
+      goal: user.userGoal.weight,
+      BMI: user.userData.BMI,
+      category: user.userData.category,
+      dailyCals: user.userGoal.dailyCals,
+    };
     response.success = true;
     response.message = "User profile fetched successfully";
-    response.data = user;
+    response.data = userData;
     return res.status(200).json(response);
   } catch (err) {
     console.log(err);

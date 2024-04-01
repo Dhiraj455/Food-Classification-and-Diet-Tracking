@@ -6,14 +6,15 @@ import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
 import { Dashboard } from "./Pages/Dashboard";
 // import { Profile } from "./Pages/Profile";
-import { UpdateUser } from "./Pages/UpdateUser";
+// import { UpdateUser } from "./Pages/UpdateUser";
 import { Session } from "./Pages/Session";
 import { Profile } from "./Pages/Profile2";
+import { UpdateUser } from "./Pages/UpdateUser2";
 
 function App() {
   return (
     <CookiesProvider>
-      <div className="App">
+      <div>
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Login />} />
