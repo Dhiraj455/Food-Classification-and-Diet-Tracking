@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { addFood } from "../Services/food";
+import Navbar from "../Components/Navbar";
 
 export default function AddFood() {
   const [image, setImage] = useState();
@@ -19,9 +20,9 @@ export default function AddFood() {
   };
 
   const handleSubmit = async (e) => {
-    console.log("Submitting")
+    console.log("Submitting");
     e.preventDefault();
-    console.log(image)
+    console.log(image);
     const formData = new FormData();
     formData.append("file", image);
     // fetch("http://localhost:8000/predict_api", {
@@ -34,36 +35,42 @@ export default function AddFood() {
     //   });
     // const response = await axios.post("http://localhost:8000/predict_api", formData);
     // console.log(response);
-    fetch('http://localhost:8000/predict_api', {
-      method: 'POST',
-      body: formData
+    fetch("http://localhost:8000/predict_api", {
+      method: "POST",
+      body: formData,
     })
-    .then(response => response.json())
-    .then(data => {
-      console.log(data);
-      setPrediction(data);
-      callExpressAPI(data);
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        setPrediction(data);
+        callExpressAPI(data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
 
     const callExpressAPI = (predictionData) => {
       if (!image) {
-        console.error('No file selected');
+        console.error("No file selected");
         return;
       }
-  
+
       const expressFormData = new FormData();
-      expressFormData.append('foodImg', image, image.name);
-      expressFormData.append('name', predictionData.Food);
-      expressFormData.append('calories', predictionData.Nutrition.Calories);
-      expressFormData.append('protein', predictionData.Nutrition['Protein (g)']);
-      expressFormData.append('carbs', predictionData.Nutrition['Carbohydrates (g)']);
-      expressFormData.append('fats', predictionData.Nutrition['Fat (g)']);
-      expressFormData.append('fiber', predictionData.Nutrition['Fiber (g)']);
+      expressFormData.append("foodImg", image, image.name);
+      expressFormData.append("name", predictionData.Food);
+      expressFormData.append("calories", predictionData.Nutrition.Calories);
+      expressFormData.append(
+        "protein",
+        predictionData.Nutrition["Protein (g)"]
+      );
+      expressFormData.append(
+        "carbs",
+        predictionData.Nutrition["Carbohydrates (g)"]
+      );
+      expressFormData.append("fats", predictionData.Nutrition["Fat (g)"]);
+      expressFormData.append("fiber", predictionData.Nutrition["Fiber (g)"]);
       // Add other fields as needed
-      
+
       const data = addFood(expressFormData);
       console.log(data);
       // fetch('http://localhost:5000/api/v1/food/add', {
@@ -79,49 +86,56 @@ export default function AddFood() {
       //   console.error('Error:', error);
       // });
     };
-
-  }
+  };
   return (
-    <div className="container">
-      <div className="row">
-        <div className="col-lg-12">
-          <h1>FOOD CLASSIFICATION</h1>
-        </div>
-        <div>
+    <>
+      <Navbar />
+      <div className="container">
+        <div className="row">
           <div className="col-lg-12">
-            {/* <form
+            <h1>FOOD CLASSIFICATION</h1>
+          </div>
+          <div>
+            <div className="col-lg-12">
+              {/* <form
               className="form-inline"
               action="/predict"
               method="post"
               enctype="multipart/form-data"
             > */}
-            <input
-              type="file"
-              p="1.5"
-              accept="image/*"
-              name="image"
-              onChange={handleChange}
-            />
-            <br />
-            <input type="submit" className="btn btn-success" value="Predict" onClick={handleSubmit}/>
-            {/* </form> */}
+              <input
+                type="file"
+                p="1.5"
+                accept="image/*"
+                name="image"
+                onChange={handleChange}
+              />
+              <br />
+              <input
+                type="submit"
+                className="btn btn-success"
+                value="Predict"
+                onClick={handleSubmit}
+              />
+              {/* </form> */}
+            </div>
           </div>
+          {prediction && (
+            <div>
+              <p>Food: {prediction.Food}</p>
+              <p>Nutrition:</p>
+              <ul>
+                <li>Calories: {prediction.Nutrition.Calories}</li>
+                <li>Protein: {prediction.Nutrition["Protein (g)"]}</li>
+                <li>Carbs: {prediction.Nutrition["Carbohydrates (g)"]}</li>
+                <li>Fat: {prediction.Nutrition["Fat (g)"]}</li>
+                <li>Fiber: {prediction.Nutrition["Fiber (g)"]}</li>
+                {/* Add other nutrition values as needed */}
+              </ul>
+            </div>
+          )}
         </div>
-        {prediction && (
-        <div>
-          <p>Food: {prediction.Food}</p>
-          <p>Nutrition:</p>
-          <ul>
-            <li>Calories: {prediction.Nutrition.Calories}</li>
-            <li>Protein: {prediction.Nutrition['Protein (g)']}</li>
-            <li>Carbs: {prediction.Nutrition['Carbohydrates (g)']}</li>
-            <li>Fat: {prediction.Nutrition['Fat (g)']}</li>
-            <li>Fiber: {prediction.Nutrition['Fiber (g)']}</li>
-            {/* Add other nutrition values as needed */}
-          </ul>
-        </div>
-      )}
       </div>
-    </div>
+    </>
   );
 }

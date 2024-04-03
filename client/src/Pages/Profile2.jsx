@@ -53,54 +53,59 @@ export const Profile = () => {
                   </div>
                   <div className="col-md-6">
                     <label className="small mb-1" htmlFor="inputLastName">
-                      Last name
+                    Gender
                     </label>
-                    <input
-                      className="form-control"
-                      id="inputLastName"
-                      type="text"
-                      placeholder="Enter your last name"
-                    />
+                    <p className="form-control">
+                      {userData.gender}
+                    </p>
                   </div>
                 </div>
                 <div className="mb-3">
                   <label className="small mb-1" htmlFor="inputEmailAddress">
-                    Email address
+                    Weight (Kg)
                   </label>
-                  <input
-                    className="form-control"
-                    id="inputEmailAddress"
-                    type="email"
-                    placeholder="Enter your email address"
-                  />
+                  <p className="form-control">
+                      {userData.weight}
+                    </p>
                 </div>
                 <div className="row gx-3 mb-3">
                   <div className="col-md-6">
                     <label className="small mb-1" htmlFor="inputPhone">
-                      Phone number
+                      Height (cm)
                     </label>
-                    <input
-                      className="form-control"
-                      id="inputPhone"
-                      type="tel"
-                      placeholder="Enter your phone number"
-                    />
+                    <p className="form-control">
+                      {userData.height}
+                    </p>
                   </div>
                   <div className="col-md-6">
                     <label className="small mb-1" htmlFor="inputBirthday">
-                      Birthday
+                    Goal Weight (kg)
                     </label>
-                    <input
-                      className="form-control"
-                      id="inputBirthday"
-                      type="text"
-                      name="birthday"
-                      placeholder="Enter your birthday"
-                    />
+                    <p className="form-control">
+                      {userData.goal}
+                    </p>
                   </div>
                 </div>
-                <button className="btn btn-primary" type="button">
-                  Save changes
+                <div className="row gx-3 mb-3">
+                  <div className="col-md-6">
+                    <label className="small mb-1" htmlFor="inputPhone">
+                      BMI
+                    </label>
+                    <p className="form-control">
+                      {userData.BMI}
+                    </p>
+                  </div>
+                  <div className="col-md-6">
+                    <label className="small mb-1" htmlFor="inputBirthday">
+                    Category
+                    </label>
+                    <p className="form-control">
+                      {userData.category}
+                    </p>
+                  </div>
+                </div>
+                <button className="btn btn-primary" type="button" onClick={() => navigate("/update")}>
+                  Update Profile
                 </button>
               </div>
             </div>

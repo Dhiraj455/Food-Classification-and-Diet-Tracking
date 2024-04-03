@@ -172,3 +172,7 @@ section {
     font-weight: bold;
     margin-bottom: 10px;
 }
+
+select.form-control:not([size]):not([multiple]) {
+    height: calc(2.25rem + 13px);
+}

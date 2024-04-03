@@ -2,13 +2,19 @@ import React, { useEffect, useState } from "react";
 import { getAllSession } from "../Services/food";
 import "./Sessions.css";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../Components/Navbar";
+import { userProfile } from "../Services/user";
 
 export const Session = () => {
   const navigate = useNavigate();
   const [sessionData, setSessionData] = useState([]);
+  const [cals, setCals] = useState(0);
   useEffect(() => {
     const fetchSession = async () => {
       const response = await getAllSession();
+      const userCals =  await userProfile();
+      console.log(userCals.data);
+      setCals(userCals.data.dailyCals);
       if (response.success) {
         setSessionData(response.data);
       }
@@ -17,6 +23,7 @@ export const Session = () => {
   }, []);
   return (
     <div>
+      <Navbar />
       <button onClick={() => navigate("/dashboard")} style={{ padding: "10px" }}>Dashboard</button>
       <button onClick={() => navigate("/profile")} style={{ padding: "10px" }}>Profile</button>
       <h1>All User's Sessions</h1>
@@ -28,7 +35,7 @@ export const Session = () => {
             <div key={index}>
               <h3>Session {index + 1}</h3>
               <p>Session Date: {session.session.sessionDay}</p>
-              <p>Sessions Total Calories {session.totalCalories} </p>
+              <p>Sessions Total Calories {session.totalCalories} {session.totalCalories > cals ? <span>&#10004;</span> : <span>&#10006;</span>}</p>
               {session.food.length === 0 ? (
                 <p>No food added</p>
               ) : (

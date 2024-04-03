@@ -18,7 +18,7 @@ export const Dashboard = () => {
             proper care{" "}
           </p>
           <div className="hero-btn">
-            <button>Predict Food</button>
+            <button onClick={() => navigate("/addfood")}>Predict Food</button>
             <button className="read">Read More</button>
           </div>
         </div>
