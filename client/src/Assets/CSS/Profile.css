@@ -31,7 +31,7 @@ section {
 
 .heading {
     text-align: center;
-    color: var(--primary-color);
+    color: #fff;
     text-transform: capitalize;
     margin-bottom: 3rem;
     font-size: 4rem;

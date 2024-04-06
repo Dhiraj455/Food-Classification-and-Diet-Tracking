@@ -16,36 +16,39 @@ export default function About() {
           </div>
 
           <div className="content">
-            <h3 className="title">We are a group of hair care specialists</h3>
+            <h3 className="title">Empowering Health Through Food Knowledge</h3>
             <p>
-              At our haircare haven, we're not just creating products; we're
-              crafting haircare magic tailored exclusively for YOU! Because we're
-              obsessed with the beauty of individuality, we don't believe in
-              one-size-fits-all. Your hair is your canvas, and we're the artists
-              who get it! Say goodbye to generic haircare and hello to a
-              personalized hair journey that's as unique as you are.
+              At Healthify, we're on a mission to revolutionize the way you
+              interact with food. Our platform utilizes cutting-edge technology
+              to predict and recognize unknown food items, providing you with
+              invaluable insights into their nutritional content.
             </p>
             <p>
-              Ready to experience haircare that's all about YOU? Let's make your
-              hair dreams come true!
+              Whether you're aiming to lose weight, maintain a healthy
+              lifestyle, or simply make informed dietary choices, Healthify is
+              your go-to resource. With user data tracking features that include
+              weight, height, and calorie intake measurement, we tailor our
+              recommendations to suit your unique needs and goals. Say goodbye
+              to guesswork and hello to a healthier, happier you with Healthify.
             </p>
 
             <div className="icons-container">
               <div className="icons">
                 <img src={aboutIcon1} alt="IMG" />
-                <h3>expertise in hair care</h3>
+                <h3>Predict Food</h3>
               </div>
               <div className="icons">
                 <img src={aboutIcon2} alt="IMG" />
-                <h3>quality ingredients</h3>
+                <h3>Maintain Sessions</h3>
               </div>
               <div className="icons">
                 <img src={aboutIcon3} alt="IMG" />
-                <h3>Personalized service</h3>
+                <h3>Personalized Service</h3>
               </div>
             </div>
           </div>
         </div>
-      </div></>
+      </div>
+    </>
   );
 }

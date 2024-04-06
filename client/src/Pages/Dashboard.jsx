@@ -15,10 +15,11 @@ export const Dashboard = () => {
         <Navbar />
         <div className="hero-info">
           <h2>Healthify</h2>
-          <p>
-            A place to predict your daily food and handle your diet with proper
-            care A place to predict your daily food and handle your diet with
-            proper care{" "}
+          <p style={{ color: "white" }}>
+            Welcome to Healthify, where we unlock the nutritional secrets of
+            every meal, empowering you to make informed choices for a healthier,
+            happier life. Our cutting-edge platform predicts and analyzes
+            unknown food items, revealing their hidden nutritional profiles.{" "}
           </p>
           <div className="hero-btn">
             <button onClick={() => navigate("/addfood")}>Predict Food</button>
@@ -28,7 +29,7 @@ export const Dashboard = () => {
       </div>
       {/* <Hero /> */}
       <div className="about-section">
-      <About />
+        <About />
       </div>
       <Reviews />
       <Footer />

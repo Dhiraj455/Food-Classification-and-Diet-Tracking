@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { userProfile, userUpdate } from "../Services/user";
 import { useNavigate } from "react-router-dom";
+import "../Assets/CSS/Profile.css";
+import Navbar from "../Components/Navbar";
 
 export const UpdateUser = () => {
   const [userData, setUserData] = useState({});
@@ -27,177 +29,134 @@ export const UpdateUser = () => {
     const response = await userUpdate(userData);
     console.log(response);
     navigate("/profile");
-  }
-  // age, height, weight, gender, goal Update this data
+  };
+
   return (
     <div>
-      <form className="form-horizontal">
-        <fieldset>
-          <div id="legend">
-            <legend class="">Update User</legend>
-          </div>
-          <div class="control-group">
-            <label class="control-label" for="username">
-              Username
-            </label>
-            <div class="controls">
-              <input
-                type="text"
-                id="username"
-                name="username"
-                placeholder=""
-                class="input-xlarge"
-                value={userData.username}
-                onChange={handleChange}
-              />
-              <p
-                class="help-block
-                        "
-              >
-                Username can contain any letters or numbers, without spaces
-              </p>
+      <Navbar />
+      <div className="container-xl px-4 mt-4">
+        <h2 style={{ color: "white" }}>User Update</h2>
+        <hr className="mt-0 mb-4" />
+        <div className="row">
+          <div className="col-xl-12">
+            <div className="card mb-4">
+              <div className="card-header">Account Details</div>
+              <div className="card-body">
+                <form>
+                  <div className="username mb-3">
+                    <label className="small mb-1" htmlFor="inputUsername">
+                      Username
+                    </label>
+                    <input
+                      className="form-control"
+                      id="inputUsername"
+                      type="text"
+                      placeholder="Enter your username"
+                      name="username"
+                      value={userData.username}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label className="small mb-1" htmlFor="inputEmailAddress">
+                      Email address
+                    </label>
+                    <input
+                      className="form-control"
+                      id="inputEmailAddress"
+                      type="email"
+                      placeholder="Enter your email address"
+                      name="email"
+                      value={userData.email}
+                    />
+                  </div>
+                  <div className="row gx-3 mb-3">
+                    <div className="col-md-6">
+                      <label className="small mb-1" htmlFor="inputFirstName">
+                        Age
+                      </label>
+                      <input
+                        className="form-control"
+                        id="inputFirstName"
+                        type="number"
+                        placeholder="Enter your first name"
+                        name="age"
+                        value={userData.age}
+                        onChange={handleChange}
+                      />
+                    </div>
+                    <div className="col-md-6">
+                      <label className="small mb-1" htmlFor="inputLastName">
+                        Gender
+                      </label>
+                      <select
+                        id="gender"
+                        name="gender"
+                        className="form-control"
+                        value={userData.gender}
+                        onChange={handleChange}
+                      >
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div className="row gx-3 mb-3">
+                    <div className="col-md-6">
+                      <label className="small mb-1" htmlFor="inputPhone">
+                        Weight (kg)
+                      </label>
+                      <input
+                        className="form-control"
+                        id="inputPhone"
+                        type="number"
+                        placeholder="Enter your phone number"
+                        name="weight"
+                        value={userData.weight}
+                        onChange={handleChange}
+                      />
+                    </div>
+                    <div className="col-md-6">
+                      <label className="small mb-1" htmlFor="inputBirthday">
+                        Height (cm)
+                      </label>
+                      <input
+                        className="form-control"
+                        id="inputBirthday"
+                        type="number"
+                        name="height"
+                        placeholder="Enter your birthday"
+                        value={userData.height}
+                        onChange={handleChange}
+                      />
+                    </div>
+                  </div>
+                  <div className="row gx-3 mb-3">
+                    <div className="col-md-6">
+                      <label className="small mb-1" htmlFor="inputPhone">
+                        Goal Weight (kg)
+                      </label>
+                      <input
+                        className="form-control"
+                        id="inputPhone"
+                        type="number"
+                        placeholder="Enter your phone number"
+                        name="goal"
+                        value={userData.goal}
+                        onChange={handleChange}
+                      />
+                    </div>
+                  </div>
+                  <button className="btn btn-primary" type="button" onClick={handleSubmit}>
+                    Save changes
+                  </button>
+                </form>
+              </div>
             </div>
           </div>
-          <div class="control-group">
-            <label class="control-label" for="email">
-              E-mail
-            </label>
-            <div class="controls">
-              <input
-                type="text"
-                id="email"
-                name="email"
-                placeholder=""
-                class="input-xlarge"
-                value={userData.email}
-              />
-              <p
-                class="help-block
-                        "
-              >
-                Please provide your E-mail
-              </p>
-            </div>
-          </div>
-          <div className="control-group">
-            <label className="control-label" for="age">
-              Age
-            </label>
-            <div className="controls">
-              <input
-                type="number"
-                id="age"
-                name="age"
-                placeholder=""
-                className="input-xlarge"
-                value={
-                  userData.userData
-                    ? userData.userData.age
-                    : userData.age
-                    ? userData.age
-                    : ""
-                }
-                onChange={handleChange}
-              />
-              <p className="help-block">Please provide your age</p>
-            </div>
-          </div>
-          <div className="control-group">
-            <label className="control-label" for="gender">
-              Gender
-            </label>
-            <div className="controls">
-              <select
-                id="gender"
-                name="gender"
-                className="input-xlarge"
-                value={
-                  userData.userData
-                    ? userData.userData.gender
-                    : userData.gender
-                    ? userData.gender
-                    : ""
-                }
-                onChange={handleChange}
-              >
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Other</option>
-              </select>
-            </div>
-          </div>
-          <div className="control-group">
-            <label className="control-label" for="height">
-              Height
-            </label>
-            <div className="controls">
-              <input
-                type="number"
-                id="height"
-                name="height"
-                placeholder=""
-                className="input-xlarge"
-                value={
-                  userData.userData
-                    ? userData.userData.height
-                    : userData.height
-                    ? userData.height
-                    : ""
-                }
-                onChange={handleChange}
-              />
-              <p className="help-block">Please provide your height</p>
-            </div>
-          </div>
-          <div className="control-group">
-            <label className="control-label" for="weight">
-              Weight
-            </label>
-            <div className="controls">
-              <input
-                type="number"
-                id="weight"
-                name="weight"
-                placeholder=""
-                className="input-xlarge"
-                value={
-                  userData.userData
-                    ? userData.userData.weight
-                    : userData.weight
-                    ? userData.weight
-                    : ""
-                }
-                onChange={handleChange}
-              />
-              <p className="help-block">Please provide your weight</p>
-            </div>
-          </div>
-          <div className="control-group">
-            <label className="control-label" for="goal">
-              Goal
-            </label>
-            <div className="controls">
-              <input
-                type="number"
-                id="goal"
-                name="goal"
-                placeholder=""
-                className="input-xlarge"
-                value={
-                  userData.userGoal
-                    ? userData.userGoal.goal
-                    : userData.goal
-                    ? userData.goal
-                    : ""
-                }
-                onChange={handleChange}
-              />
-              <p className="help-block">Please provide your goal weight</p>
-            </div>
-          </div>
-        </fieldset>
-      </form>
-      <button onClick={handleSubmit}>Update/Submit</button>
+        </div>
+      </div>
     </div>
   );
 };

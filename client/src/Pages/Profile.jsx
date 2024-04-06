@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { userProfile } from "../Services/user";
 import { useNavigate } from "react-router-dom";
+// import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBBtn, MDBTypography } from 'mdb-react-ui-kit';
+import "../Assets/CSS/Profile.css";
+import Navbar from "../Components/Navbar";
+import { Hero } from "../Components/Hero";
+import { Footer } from "../Components/Footer";
 
 export const Profile = () => {
   const [userData, setUserData] = useState({});
@@ -14,46 +19,111 @@ export const Profile = () => {
     fetchUser();
   }, []);
   return (
-    <div>
-      <div>
-        <h1>Profile</h1>
-        <p>{userData.username}</p>
-        <p>{userData.email}</p>
-        {userData.userData ? (
-          <>
-            <p>User Data:</p>
-            <p>
-              Gender: <strong>{userData.userData.gender}</strong>
-            </p>
-            <p>
-              Age: <strong>{userData.userData.age}</strong>
-            </p>
-            <p>
-              Height: <strong>{userData.userData.height}</strong>
-            </p>
-            <p>
-              Weight: <strong>{userData.userData.weight}</strong>
-            </p>
-            <p>
-              BMI: <strong>{userData.userData.BMI}</strong>
-            </p>
-            <p>
-              Category: <strong>{userData.userData.category}</strong>
-            </p>
-            <p>User Goal:</p>
-            <p>
-              Weight: <strong>{userData.userGoal.weight}</strong>
-            </p>
-            <p>
-              Carbs: <strong>{userData.userGoal.dailyCarbs}</strong>
-            </p>
-          </>
-        ) : (
-          <>User data not added</>
-        )}
+    <>
+    <Navbar />
+    <Hero img="https://static.vecteezy.com/system/resources/previews/021/736/678/original/background-biru-keren-dan-kosong-abstract-untuk-template-desain-powerpoint-ppt-free-vector.jpg" text={"User Profile"}/>
+      <div className="container-xl px-4 mt-4">
+        <hr className="mt-0 mb-4" />
+        <div className="row">
+          <div className="col-xl-4">
+            <div className="card mb-4 mb-xl-0">
+              <div className="card-header">Profile Picture</div>
+              <div className="card-body text-center">
+                <img
+                  className="img-account-profile rounded-circle mb-2"
+                  src="http://bootdey.com/img/Content/avatar/avatar1.png"
+                  alt=""
+                />
+                <div className="small font-italic text-muted mb-4">
+                  <h4>Name : {userData.username}</h4>
+                  <h4>Email : {userData.email}</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-xl-8">
+            <div className="card mb-4">
+              <div className="card-header">Account Details</div>
+              <div className="card-body">
+                <div className="row gx-3 mb-3">
+                  <div className="col-md-6">
+                    <label className="small mb-1" htmlFor="inputFirstName">
+                      Age
+                    </label>
+                    <p className="form-control">
+                      {userData.age}
+                    </p>
+                  </div>
+                  <div className="col-md-6">
+                    <label className="small mb-1" htmlFor="inputLastName">
+                    Gender
+                    </label>
+                    <p className="form-control">
+                      {userData.gender}
+                    </p>
+                  </div>
+                </div>
+                <div className="mb-3">
+                  <label className="small mb-1" htmlFor="inputEmailAddress">
+                    Weight (Kg)
+                  </label>
+                  <p className="form-control">
+                      {userData.weight}
+                    </p>
+                </div>
+                <div className="row gx-3 mb-3">
+                  <div className="col-md-6">
+                    <label className="small mb-1" htmlFor="inputPhone">
+                      Height (cm)
+                    </label>
+                    <p className="form-control">
+                      {userData.height}
+                    </p>
+                  </div>
+                  <div className="col-md-6">
+                    <label className="small mb-1" htmlFor="inputBirthday">
+                    Goal Weight (kg)
+                    </label>
+                    <p className="form-control">
+                      {userData.goal}
+                    </p>
+                  </div>
+                </div>
+                <div className="row gx-3 mb-3">
+                  <div className="col-md-6">
+                    <label className="small mb-1" htmlFor="inputPhone">
+                      BMI
+                    </label>
+                    <p className="form-control">
+                      {userData.BMI}
+                    </p>
+                  </div>
+                  <div className="col-md-6">
+                    <label className="small mb-1" htmlFor="inputBirthday">
+                    Category
+                    </label>
+                    <p className="form-control">
+                      {userData.category}
+                    </p>
+                  </div>
+                  <div className="col-md-6">
+                    <label className="small mb-1" htmlFor="inputBirthday">
+                    Calories Required
+                    </label>
+                    <p className="form-control">
+                      {userData.dailyCals}
+                    </p>
+                  </div>
+                </div>
+                <button className="btn btn-primary" type="button" onClick={() => navigate("/update")}>
+                  Update Profile
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <button onClick={() => navigate("/update")} style={{ padding: "10px" }}>Update</button>
-      <button onClick={() => navigate("/sessions")} style={{ padding: "10px" }}>Sessions</button>
-    </div>
+      <Footer />
+    </>
   );
 };

@@ -5,11 +5,9 @@ import { CookiesProvider } from "react-cookie";
 import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
 import { Dashboard } from "./Pages/Dashboard";
-// import { Profile } from "./Pages/Profile";
-// import { UpdateUser } from "./Pages/UpdateUser";
 import { Session } from "./Pages/Session";
-import { Profile } from "./Pages/Profile2";
-import { UpdateUser } from "./Pages/UpdateUser2";
+import { Profile } from "./Pages/Profile";
+import { UpdateUser } from "./Pages/UpdateUser";
 
 function App() {
   return (

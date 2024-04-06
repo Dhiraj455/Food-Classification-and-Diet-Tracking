@@ -2,14 +2,17 @@ import React, { useState } from "react";
 import { addFood } from "../Services/food";
 import Navbar from "../Components/Navbar";
 import { Hero } from "../Components/Hero";
+import { Footer } from "../Components/Footer";
 
 export default function AddFood() {
   const [image, setImage] = useState();
   const [prediction, setPrediction] = useState();
+  const [file, setFile] = useState();
   const handleChange = (e) => {
     e.preventDefault();
     setImage(e.target.files[0]);
     console.log(e.target.files[0]);
+    setFile(URL.createObjectURL(e.target.files[0]));
   };
 
   const handleSubmit = async (e) => {
@@ -61,7 +64,10 @@ export default function AddFood() {
   return (
     <>
       <Navbar />
-      <Hero img="https://images.indianexpress.com/2023/12/food.jpg" text={"FOOD CLASSIFICATION"}/>
+      <Hero
+        img="https://images.indianexpress.com/2023/12/food.jpg"
+        text={"FOOD CLASSIFICATION"}
+      />
       <div className="container">
         <div className="row">
           <div>
@@ -84,8 +90,8 @@ export default function AddFood() {
             </div>
           </div>
           {prediction && (
-            <div>
-              <p>Food: {prediction.Food}</p>
+            <div style={{marginTop: "20px", width: "100%"}}>
+              {/* <p>Food: {prediction.Food}</p>
               <p>Nutrition:</p>
               <ul>
                 <li>Calories: {prediction.Nutrition.Calories}</li>
@@ -93,12 +99,38 @@ export default function AddFood() {
                 <li>Carbs: {prediction.Nutrition["Carbohydrates (g)"]}</li>
                 <li>Fat: {prediction.Nutrition["Fat (g)"]}</li>
                 <li>Fiber: {prediction.Nutrition["Fiber (g)"]}</li>
-                {/* Add other nutrition values as needed */}
-              </ul>
+              </ul> */}
+              <table className="table table-image">
+                <thead>
+                  <tr>
+                    <th scope="col">Food Image</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Calories</th>
+                    <th scope="col">Proteins</th>
+                    <th scope="col">Carbs</th>
+                    <th scope="col">Fats</th>
+                    <th scope="col">Fibers</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <img src={file} alt="food" />
+                    </td>
+                    <td>{prediction.Food}</td>
+                    <td>{prediction.Nutrition.Calories}</td>
+                    <td>{prediction.Nutrition["Protein (g)"]}</td>
+                    <td>{prediction.Nutrition["Carbohydrates (g)"]}</td>
+                    <td>{prediction.Nutrition["Fat (g)"]}</td>
+                    <td>{prediction.Nutrition["Fiber (g)"]}</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           )}
         </div>
       </div>
+      <Footer />
     </>
   );
 }
