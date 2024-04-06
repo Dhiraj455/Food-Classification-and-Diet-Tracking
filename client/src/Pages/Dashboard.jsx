@@ -2,6 +2,9 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../Components/Navbar";
 import "../Assets/CSS/Dashboard.css";
+import Reviews from "../Components/Reviews";
+import About from "../Components/About";
+import { Footer } from "../Components/Footer";
 // import Hero from '../Components/Hero'
 
 export const Dashboard = () => {
@@ -24,7 +27,12 @@ export const Dashboard = () => {
         </div>
       </div>
       {/* <Hero /> */}
-      Dashboard <br />
+      <div className="about-section">
+      <About />
+      </div>
+      <Reviews />
+      <Footer />
+      {/* Dashboard <br />
       <button onClick={() => navigate("/addfood")} style={{ padding: "10px" }}>
         Add Food
       </button>{" "}
@@ -35,7 +43,7 @@ export const Dashboard = () => {
       <br />
       <button onClick={() => navigate("/sessions")} style={{ padding: "10px" }}>
         Sessions
-      </button>
+      </button> */}
     </>
   );
 };

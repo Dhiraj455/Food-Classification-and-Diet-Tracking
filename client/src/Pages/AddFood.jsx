@@ -1,22 +1,15 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { addFood } from "../Services/food";
 import Navbar from "../Components/Navbar";
+import { Hero } from "../Components/Hero";
 
 export default function AddFood() {
   const [image, setImage] = useState();
   const [prediction, setPrediction] = useState();
   const handleChange = (e) => {
-    const fileReader = new FileReader();
     e.preventDefault();
-    // var pic = e.target.files[0];
     setImage(e.target.files[0]);
     console.log(e.target.files[0]);
-    // fileReader.onload = function (e) {
-    //   setImage(e.target.result);
-    //   console.log(e.target.result);
-    // };
-    // fileReader.readAsDataURL(pic);
   };
 
   const handleSubmit = async (e) => {
@@ -25,16 +18,6 @@ export default function AddFood() {
     console.log(image);
     const formData = new FormData();
     formData.append("file", image);
-    // fetch("http://localhost:8000/predict_api", {
-    //   method: "POST",
-    //   body: formData,
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     console.log(data);
-    //   });
-    // const response = await axios.post("http://localhost:8000/predict_api", formData);
-    // console.log(response);
     fetch("http://localhost:8000/predict_api", {
       method: "POST",
       body: formData,
@@ -73,36 +56,16 @@ export default function AddFood() {
 
       const data = addFood(expressFormData);
       console.log(data);
-      // fetch('http://localhost:5000/api/v1/food/add', {
-      //   method: 'POST',
-      //   body: expressFormData,
-      // })
-      // .then(response => response.json())
-      // .then(data => {
-      //   console.log(data);
-      //   // Handle response from Express API
-      // })
-      // .catch(error => {
-      //   console.error('Error:', error);
-      // });
     };
   };
   return (
     <>
       <Navbar />
+      <Hero img="https://images.indianexpress.com/2023/12/food.jpg" text={"FOOD CLASSIFICATION"}/>
       <div className="container">
         <div className="row">
-          <div className="col-lg-12">
-            <h1>FOOD CLASSIFICATION</h1>
-          </div>
           <div>
             <div className="col-lg-12">
-              {/* <form
-              className="form-inline"
-              action="/predict"
-              method="post"
-              enctype="multipart/form-data"
-            > */}
               <input
                 type="file"
                 p="1.5"

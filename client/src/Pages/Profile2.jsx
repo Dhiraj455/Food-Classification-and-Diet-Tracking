@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 // import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBBtn, MDBTypography } from 'mdb-react-ui-kit';
 import "../Assets/CSS/Profile.css";
 import Navbar from "../Components/Navbar";
+import { Hero } from "../Components/Hero";
+import { Footer } from "../Components/Footer";
 
 export const Profile = () => {
   const [userData, setUserData] = useState({});
@@ -19,6 +21,7 @@ export const Profile = () => {
   return (
     <>
     <Navbar />
+    <Hero img="https://static.vecteezy.com/system/resources/previews/021/736/678/original/background-biru-keren-dan-kosong-abstract-untuk-template-desain-powerpoint-ppt-free-vector.jpg" text={"User Profile"}/>
       <div className="container-xl px-4 mt-4">
         <hr className="mt-0 mb-4" />
         <div className="row">
@@ -112,6 +115,7 @@ export const Profile = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

@@ -47,3 +47,8 @@
 .hero-btn{
     margin-top: 20px;
 }
+
+.about-section{
+    background: linear-gradient(rgba(144, 60, 124, 0.4), rgba(144, 60, 124, 0.4));
+    padding: 20px;
+}
