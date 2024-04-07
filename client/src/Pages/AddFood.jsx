@@ -103,7 +103,7 @@ export default function AddFood() {
               <table className="table table-image">
                 <thead>
                   <tr>
-                    <th scope="col">Food Image</th>
+                    {/* <th scope="col">Food Image</th> */}
                     <th scope="col">Name</th>
                     <th scope="col">Calories</th>
                     <th scope="col">Proteins</th>
@@ -114,9 +114,9 @@ export default function AddFood() {
                 </thead>
                 <tbody>
                   <tr>
-                    <td>
+                    {/* <td>
                       <img src={file} alt="food" />
-                    </td>
+                    </td> */}
                     <td>{prediction.Food}</td>
                     <td>{prediction.Nutrition.Calories}</td>
                     <td>{prediction.Nutrition["Protein (g)"]}</td>

@@ -4,4 +4,6 @@
 archive.zip
 /ML_testing
 /ML_backend/bestmodel_20class.hdf5
+/ML_backend/bestmodel_11class.hdf5
+/ML_backend/trainedmodel_11class.hdf5
 backend/.env
