@@ -48,6 +48,19 @@ section {
     padding: 1rem 3rem;
 }
 
+.btn1 {
+    margin-top: 1rem;
+    margin-left: 10px;
+    display: inline-block;
+    background: var(--primary-color);
+    color: var(--white);
+    font-size: 1.5rem;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    /* padding: 1rem 3rem; */
+}
+
 .btn:hover {
     background: var(--hover);
 }

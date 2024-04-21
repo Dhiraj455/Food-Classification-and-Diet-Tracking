@@ -14,4 +14,8 @@ router.post(
 
 router.get("/getSession", authentication, foodController.getAllSession);
 
+router.post("/addons", authentication, foodController.addAddons);
+
+router.get("/getAddons/:foodId", authentication, foodController.getAddons);
+
 module.exports = router;

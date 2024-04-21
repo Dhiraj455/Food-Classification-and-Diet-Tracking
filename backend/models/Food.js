@@ -48,6 +48,19 @@ const FoodSchema = new mongoose.Schema({
       type: String,
     },
   },
+  addons: [
+    {
+      name: {
+        type: String,
+      },
+      calories: {
+        type: Number,
+      },
+      grams: {
+        type: Number,
+      },
+    },
+  ],
   createdBy: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",

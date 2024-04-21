@@ -5,9 +5,15 @@ import Navbar from "../Components/Navbar";
 import { userProfile } from "../Services/user";
 import { Hero } from "../Components/Hero";
 import { Footer } from "../Components/Footer";
+import { Addons } from "../Components/Addons";
+import { ViewAddon } from "../Components/ViewAddon";
 
 export const Session = () => {
   const [sessionData, setSessionData] = useState([]);
+  const [openPopUp, setOpenPopUp] = useState(false);
+  const [openViewPopUp, setOpenViewPopUp] = useState(false);
+  const [foodId, setFoodId] = useState("");
+  const [addonText, setAddonText] = useState("Add Addons");
   const [cals, setCals] = useState(0);
   useEffect(() => {
     const fetchSession = async () => {
@@ -21,6 +27,24 @@ export const Session = () => {
     };
     fetchSession();
   }, []);
+
+  const closePopup = () => {
+    setOpenPopUp(false);
+    setOpenViewPopUp(false);
+  };
+
+  const addOpenPop = (id, text) => {
+    setOpenPopUp(true);
+    setFoodId(id);
+    setAddonText(text);
+  };
+
+  const viewOpenPop = (id, text) => {
+    setOpenViewPopUp(true);
+    setFoodId(id);
+    setAddonText(text);
+  };
+
   return (
     <div>
       <Navbar />
@@ -40,9 +64,9 @@ export const Session = () => {
                 <p>
                   Sessions Total Calories {session.totalCalories}{" "}
                   {session.totalCalories > cals ? (
-                    <span style={{color: "green"}}>&#10004;</span>
+                    <span style={{ color: "green" }}>&#10004;</span>
                   ) : (
-                    <span style={{color: "red"}}>&#10006;</span>
+                    <span style={{ color: "red" }}>&#10006;</span>
                   )}
                 </p>
                 {session.food.length === 0 ? (
@@ -60,6 +84,7 @@ export const Session = () => {
                           <th scope="col">Carbs</th>
                           <th scope="col">Fats</th>
                           <th scope="col">Fibers</th>
+                          <th scope="col">Addons</th>
                         </tr>
                       </thead>
                       {session.food.map((food, index) => {
@@ -80,48 +105,26 @@ export const Session = () => {
                               <td>{food.foodDetails.carbs}</td>
                               <td>{food.foodDetails.fats}</td>
                               <td>{food.foodDetails.fiber}</td>
-                            </tr>
-                          </tbody>
-                          /* <img src={food.foodDetails.foodImg} alt="" />
-                        <h5>Food {index + 1}</h5>
-                        <p>Name: {food.foodDetails.name}</p>
-                        <p>Calories: {food.foodDetails.calories}</p>
-                        <p>Protein: {food.foodDetails.protein}</p>
-                        <p>Carbs: {food.foodDetails.carbs}</p>
-                        <p>Fats: {food.foodDetails.fats}</p>
-                        <p>Fiber: {food.foodDetails.fiber}</p> */
-                          /* <table>
-                          <thead>
-                            <tr>
-                              <th>Sr No.</th>
-                              <th>Food Image</th>
-                              <th>Food</th>
-                              <th>Calories</th>
-                              <th>Protein</th>
-                              <th>Carbs</th>
-                              <th>Fats</th>
-                              <th>Fiber</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td>{index + 1}</td>
                               <td>
-                                <img
-                                  src={food.foodDetails.foodImg}
-                                  alt=""
-                                  style={{ height: "70px", width: "70px" }}
-                                />
+                                <button
+                                  className="btn1"
+                                  onClick={() => {
+                                    addOpenPop(food._id, "Add Addons");
+                                  }}
+                                >
+                                  Add
+                                </button>
+                                <button
+                                  className="btn1"
+                                  onClick={() => {
+                                    viewOpenPop(food._id, "View Addons");
+                                  }}
+                                >
+                                  View
+                                </button>
                               </td>
-                              <td>{food.foodDetails.name}</td>
-                              <td>{food.foodDetails.calories}</td>
-                              <td>{food.foodDetails.protein}</td>
-                              <td>{food.foodDetails.carbs}</td>
-                              <td>{food.foodDetails.fats}</td>
-                              <td>{food.foodDetails.fiber}</td>
                             </tr>
                           </tbody>
-                        </table> */
                         );
                       })}
                     </table>
@@ -135,6 +138,16 @@ export const Session = () => {
         )}
       </div>
       <Footer />
+      {openPopUp ? (
+        <Addons closePopup={closePopup} text={addonText} id={foodId} />
+      ) : (
+        ""
+      )}
+      {openViewPopUp ? (
+        <ViewAddon closePopup={closePopup} text={addonText} id={foodId} />
+      ) : (
+        ""
+      )}
     </div>
   );
 };

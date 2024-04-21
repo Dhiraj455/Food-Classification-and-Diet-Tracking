@@ -108,3 +108,64 @@ module.exports.getAllSession = async (req, res) => {
     res.status(500).json(response);
   }
 };
+
+module.exports.addAddons = async (req, res) => {
+  let response = {
+    success: false,
+    message: "",
+    errMessage: "",
+  };
+  try {
+    console.log(req.body, "Body");
+    const { name, calories, grams, foodId } = req.body;
+    const food = await Food.Food.findOne({ _id: foodId });
+    if (!food) {
+      response.message = "Food not found";
+      return res.status(200).json(response);
+    }
+    const newAddon = {
+      name,
+      calories,
+      grams,
+    };
+    food.addons.push(newAddon);
+    await food.save();
+    Food.Food.findOneAndUpdate(
+      { _id: foodId },
+      { $inc: { "foodDetails.calories": calories } }
+    );
+    response.success = true;
+    response.message = "Addon added successfully";
+    return res.status(200).json(response);
+  } catch (err) {
+    console.log(err);
+    response.errMessage = err.message;
+    res.status(500).json(response);
+  }
+};
+
+module.exports.getAddons = async (req, res) => {
+  let response = {
+    success: false,
+    message: "",
+    data: [],
+    errMessage: "",
+  };
+  try {
+    console.log(req.body, "Body");
+    const { foodId } = req.params;
+    const food = await Food.Food.findOne({ _id: foodId });
+    if (!food) {
+      response.message = "Food not found";
+      return res.status(200).json(response);
+    }
+    response.data = food.addons;
+    response.success = true;
+    response.message = "Addon found successfully";
+    return res.status(200).json(response);
+  } catch (err) {
+    console.log(err);
+    response.errMessage = err.message;
+    res.status(500).json(response);
+  }
+};

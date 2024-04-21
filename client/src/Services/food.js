@@ -17,3 +17,21 @@ export const getAllSession = async () => {
         return error;
     }
 }
+
+export const addAddons = async (addonsData) => {
+    try {
+        const response = await axios.post(`/api/v1/food/addons`, addonsData);
+        return response.data;
+    } catch (error) {
+        return error;
+    }
+}
+
+export const getAddons = async (id) => {
+    try {
+        const response = await axios.get(`/api/v1/food/getAddons/${id}`);
+        return response.data;
+    } catch (error) {
+        return error;
+    }
+}

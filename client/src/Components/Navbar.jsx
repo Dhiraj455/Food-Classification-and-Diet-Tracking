@@ -18,7 +18,7 @@ function Navbar() {
       <nav className="navbar">
         {/* logo */}
         <a href="#home" className="navLogo">
-          Healthify{" "}
+          FoodLy{" "}
         </a>
         <ul className={`navMenu ${isActive ? "active" : ""}`}>
           <li onClick={removeActive}>

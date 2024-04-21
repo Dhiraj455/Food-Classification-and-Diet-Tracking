@@ -14,9 +14,9 @@ export const Dashboard = () => {
       <div style={{ display: "block" }} className="dashboard-hero">
         <Navbar />
         <div className="hero-info">
-          <h2>Healthify</h2>
+          <h2>FoodLy</h2>
           <p style={{ color: "white" }}>
-            Welcome to Healthify, where we unlock the nutritional secrets of
+            Welcome to FoodLy, where we unlock the nutritional secrets of
             every meal, empowering you to make informed choices for a healthier,
             happier life. Our cutting-edge platform predicts and analyzes
             unknown food items, revealing their hidden nutritional profiles.{" "}
